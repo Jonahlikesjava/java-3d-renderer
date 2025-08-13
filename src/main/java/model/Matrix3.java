@@ -2,10 +2,10 @@ package model;
 
 public class Matrix3 {
     double[] values;
-    Matrix3(double[] values) {
+    public Matrix3(double[] values) {
         this.values = values;
     }
-    Matrix3 multiply(Matrix3 other) {
+    public Matrix3 multiply(Matrix3 other) {
         double[] result = new double[9];
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -16,7 +16,7 @@ public class Matrix3 {
         }
         return new Matrix3(result);
     }
-    Vertex transform(Vertex in) {
+    public Vertex transform(Vertex in) {
         return new Vertex(
                 // Matrix multiplication
                    in.x * values[0] + in.y * values[3] + in.z * values[6],
@@ -24,4 +24,5 @@ public class Matrix3 {
                 in.x * values[2] + in.y * values[5] + in.z * values[8]
         );
     }
+
 }
