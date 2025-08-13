@@ -1,3 +1,9 @@
+import model.Triangle;
+import render.ShapeRenderer;
+import scene.ShapeFactory;
+import java.util.List;
+import model.Triangle;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,6 +23,9 @@ public class SwingTemplate {
         pane.add(pitchSlider, BorderLayout.EAST);
 
         frame.setSize(400, 400);
+        List<Triangle> tris = ShapeFactory.buildTriangles();
+        frame.add(new ShapeRenderer(tris), BorderLayout.CENTER);
+        frame.pack();
         frame.setVisible(true);
     }
 }
