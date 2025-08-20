@@ -59,6 +59,31 @@ public class ShapeRenderer extends JPanel {
             v3.x += getWidth() / 2;
             v3.y += getHeight() / 2;
 
+            Vertex ab = new Vertex(
+                    v2.x - v1.x,
+                    v2.y - v1.y,
+                    v2.getZ() - v1.getZ()
+            );
+
+            Vertex ac = new Vertex(
+                    v3.x - v1.x,
+                    v3.y - v1.y,
+                    v3.getZ() - v1.getZ()
+            );
+
+            Vertex norm = new Vertex(
+                    ab.y * ac.getZ() - ab.getZ() * ac.y,
+                    ab.getZ() * ac.x - ab.x * ac.getZ(),
+                    ab.x * ac.y - ab.y * ac.x
+            );
+            double normalLength =
+                    Math.sqrt(norm.x * norm.x + norm.y * norm.y + norm.getZ() * norm.getZ());
+            norm.x /= normalLength;
+            norm.y /= normalLength;
+            norm.setZ(norm.getZ() / normalLength);
+
+            double angleCos = Math.abs(norm.getZ());
+
             int minX = (int) Math.max(0, Math.ceil(Math.min(v1.x, Math.min(v2.x, v3.x))));
             int maxX = (int) Math.min(img.getWidth() - 1,
                     Math.floor(Math.max(v1.x, Math.max(v2.x, v3.x))));
@@ -88,6 +113,18 @@ public class ShapeRenderer extends JPanel {
         }
 
         g2.drawImage(img, 0, 0, null);
+    }
+
+    public static Color getShad(Color color, double shade) {
+        double redLinear = Math.pow(color.getRed(), 2.4) * shade;
+        double greenLinear = Math.pow(color.getGreen(), 2.4) * shade;
+        double blueLinear = Math.pow(color.getBlue(), 2.4) * shade;
+
+
+        int red = (int) (color.getRed() * shade);
+        int green = (int) (color.getGreen() * shade);
+        int blue = (int) (color.getBlue() * shade);
+        return new Color(red, green, blue);
     }
 
     public void setHeadingSlider(JSlider slider) {
