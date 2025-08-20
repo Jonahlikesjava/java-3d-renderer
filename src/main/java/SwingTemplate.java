@@ -2,7 +2,6 @@ import model.Triangle;
 import render.ShapeRenderer;
 import scene.ShapeFactory;
 import java.util.List;
-import model.Triangle;
 
 import javax.swing.*;
 import java.awt.*;

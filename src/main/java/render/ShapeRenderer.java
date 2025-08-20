@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import static java.awt.Color.*;
+
 public class ShapeRenderer extends JPanel {
     private final List<Triangle> tris;
     private JSlider headingSlider;
@@ -104,7 +106,7 @@ public class ShapeRenderer extends JPanel {
                         int zIndex = y * img.getWidth() + x;
 
                         if (zBuffer[zIndex] < depth) {
-                            img.setRGB(x, y, t.color.getRGB());
+                            img.setRGB(x, y, getShade(t.color, angleCos).getRGB());
                             zBuffer[zIndex] = depth;
                         }
                     }
@@ -115,7 +117,7 @@ public class ShapeRenderer extends JPanel {
         g2.drawImage(img, 0, 0, null);
     }
 
-    public static Color getShad(Color color, double shade) {
+    public static Color getShade(Color color, double shade) {
         double redLinear = Math.pow(color.getRed(), 2.4) * shade;
         double greenLinear = Math.pow(color.getGreen(), 2.4) * shade;
         double blueLinear = Math.pow(color.getBlue(), 2.4) * shade;
@@ -124,6 +126,7 @@ public class ShapeRenderer extends JPanel {
         int red = (int) (color.getRed() * shade);
         int green = (int) (color.getGreen() * shade);
         int blue = (int) (color.getBlue() * shade);
+
         return new Color(red, green, blue);
     }
 
