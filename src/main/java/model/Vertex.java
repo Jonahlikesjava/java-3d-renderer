@@ -9,4 +9,17 @@ public class Vertex {
         this.y = y;
         this.z = z;
     }
+    public double getX() {
+        return z;
+    }
+
+    public double getY() {
+       return y;
+    }
+
+    public double getZ() {
+       return z;
+    }
+
+
 }
